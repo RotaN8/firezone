@@ -17,6 +17,7 @@ members = [
   "http-health-check",
   "http-test-server",
   "ip-packet",
+  "socket-factory",
 ]
 
 resolver = "2"
@@ -38,6 +39,7 @@ dns-lookup = "2.0"
 tokio-tungstenite = "0.21"
 rtnetlink = { version = "0.14.1", default-features = false, features = ["tokio_socket"] }
 tokio = "1.38"
+socket2 = { version = "0.5" }
 
 connlib-client-android = { path = "connlib/clients/android"}
 connlib-client-apple = { path = "connlib/clients/apple"}
@@ -53,6 +55,7 @@ firezone-tunnel = { path = "connlib/tunnel"}
 phoenix-channel = { path = "phoenix-channel"}
 http-health-check = { path = "http-health-check"}
 ip-packet = { path = "ip-packet"}
+socket-factory = { path = "socket-factory" }
 
 [workspace.lints]
 clippy.dbg_macro = "warn"

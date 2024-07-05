@@ -37,6 +37,7 @@ backoff = "0.4"
 http-health-check = { workspace = true }
 mio = "0.8.11"
 hex-display = "0.3.0"
+socket-factory = { workspace = true }
 
 [dev-dependencies]
 difference = "2.0.0"

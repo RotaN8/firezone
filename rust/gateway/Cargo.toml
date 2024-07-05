@@ -35,6 +35,7 @@ either = "1"
 http-health-check = { workspace = true }
 static_assertions = "1.1.0"
 snownet = { workspace = true }
+socket-factory = { workspace = true }
 
 [dev-dependencies]
 serde_json = { version = "1.0", default-features = false, features = ["std"] }

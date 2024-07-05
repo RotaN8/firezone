@@ -5,7 +5,7 @@ mod make_writer;
 
 use connlib_client_shared::{
     callbacks::ResourceDescription, file_logger, keypair, Callbacks, ConnectArgs, Error, LoginUrl,
-    Session, Sockets, V4RouteList, V6RouteList,
+    Session, V4RouteList, V6RouteList,
 };
 use ip_network::{Ipv4Network, Ipv6Network};
 use secrecy::SecretString;
@@ -203,7 +203,6 @@ impl WrappedSession {
 
         let args = ConnectArgs {
             url,
-            sockets: Sockets::new(),
             private_key,
             os_version_override,
             app_version: env!("CARGO_PKG_VERSION").to_string(),
@@ -211,6 +210,8 @@ impl WrappedSession {
                 inner: Arc::new(callback_handler),
             },
             max_partition_time: Some(MAX_PARTITION_TIME),
+            tcp_socket_factory: Arc::new(socket_factory::tcp),
+            udp_socket_factory: Arc::new(socket_factory::udp),
         };
         let session = Session::connect(args, runtime.handle().clone());
 

@@ -6,9 +6,9 @@ use crate::{
 };
 use anyhow::{Context as _, Result};
 use clap::Parser;
-use connlib_client_shared::{file_logger, keypair, ConnectArgs, LoginUrl, Session, Sockets};
+use connlib_client_shared::{file_logger, keypair, ConnectArgs, LoginUrl, Session};
 use futures::{future, SinkExt as _, StreamExt as _};
-use std::{net::IpAddr, path::PathBuf, pin::pin, time::Duration};
+use std::{net::IpAddr, path::PathBuf, pin::pin, sync::Arc, time::Duration};
 use tokio::{sync::mpsc, time::Instant};
 use tracing::subscriber::set_global_default;
 use tracing_subscriber::{layer::SubscriberExt, EnvFilter, Layer, Registry};
@@ -284,7 +284,8 @@ impl Handler {
                 self.last_connlib_start_instant = Some(Instant::now());
                 let args = ConnectArgs {
                     url,
-                    sockets: Sockets::new(),
+                    tcp_socket_factory: Arc::new(crate::tcp_socket_factory),
+                    udp_socket_factory: Arc::new(crate::udp_socket_factory),
                     private_key,
                     os_version_override: None,
                     app_version: env!("CARGO_PKG_VERSION").to_string(),

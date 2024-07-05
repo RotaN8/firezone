@@ -31,6 +31,7 @@ tracing = { workspace = true }
 tracing-subscriber = { version = "0.3.17", features = ["env-filter"] }
 url = { version = "2.3.1", default-features = false }
 uuid = { version = "1.7", default-features = false, features = ["std", "v4", "serde"] }
+socket-factory = { workspace = true }
 
 [dev-dependencies]
 tempfile = "3.10.1"
@@ -41,7 +42,7 @@ mutants = "0.0.3" # Needed to mark functions as exempt from `cargo-mutants` test
 [target.'cfg(target_os = "linux")'.dependencies]
 dirs = "5.0.1"
 libc = "0.2.150"
-nix = { version =  "0.28.0", features = ["fs", "user"] }
+nix = { version =  "0.28.0", features = ["fs", "user", "socket"] }
 resolv-conf = "0.7.0"
 rtnetlink = { workspace = true }
 sd-notify = "0.4.1" # This is a pure Rust re-implementation, so it isn't vulnerable to CVE-2024-3094
