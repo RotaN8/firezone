@@ -772,17 +772,17 @@ impl ClientState {
     }
 
     fn get_resource_by_destination(&self, destination: IpAddr) -> Option<ResourceId> {
-        let maybe_cidr_resource_id = self
-            .cidr_resources
-            .longest_match(destination)
-            .map(|(_, res)| res.id);
-
         let maybe_dns_resource_id = self
             .stub_resolver
             .get_description(&destination)
             .map(|r| r.id);
 
-        maybe_cidr_resource_id.or(maybe_dns_resource_id)
+        let maybe_cidr_resource_id = self
+            .cidr_resources
+            .longest_match(destination)
+            .map(|(_, res)| res.id);
+
+        maybe_dns_resource_id.or(maybe_cidr_resource_id)
     }
 
     #[must_use]
